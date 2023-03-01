@@ -47,7 +47,7 @@ provisioner "file" {
 user_script = templatefile("../../share/terraform/scripts/startup.sh",
     {
       home_path          = "/var/tmp"
-      dns_zone           = var.dns_host == "de-gt-2.cns.tgos.xyz",
+      dns_zone           = var.dns_host == "sslip.io" ? "${self.primaryip}.${var.dns_host}" : var.dns_host,
       enable_letsencrypt = var.enable_letsencrypt,
 
       nomad_version  = local.dependencies.nomad.version,
