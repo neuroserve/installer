@@ -35,18 +35,18 @@ resource "triton_machine" "spin" {
     connection {
         host = self.primaryip
         type = "ssh"
-        user = "ubuntu"
+        user = "root"
     }
 
  # Add config files, scripts, Nomad jobs to host
 provisioner "file" {
     source      = "../../share/terraform/vm_assets/"
-    destination = "/var/tmp"
+    destination = "/mnt"
 }
   
 user_script = templatefile("../../share/terraform/scripts/startup.sh",
     {
-      home_path          = "/var/tmp"
+      home_path          = "/mnt"
       dns_zone           = var.dns_host == "sslip.io" ? "${self.primaryip}.${var.dns_host}" : var.dns_host,
       enable_letsencrypt = var.enable_letsencrypt,
 

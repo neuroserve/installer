@@ -1,7 +1,7 @@
 variable "region" {
-  description = "Civo region (Default: nyc1)"
+  description = "Triton datacenter (Default: de-gt-2)"
   type        = string
-  default     = "NYC1"
+  default     = "de-gt-2"
 }
 
 variable "network_name" {
@@ -23,15 +23,15 @@ variable "package_name" {
 }
 
 variable "image_version" {
-  description = "Version of the image used (Default: 20230127)"
+  description = "Version of the image used (Default: 2023030101)"
   type        = string
-  default     = "2023032701"
+  default     = "2023030101"
 }
 
 variable "machine_networks" {
   description = "The networks, the instance should be connected to (Default: My-Fabric-Network and Public Network)"
   type        = list
-  default     = ["4ac1c947-4786-4958-b0e5-c4e0b0ca3133", "2fa4d4ed-fd46-4469-9b95-f7a61d4f9089"]
+  default     = ["aa3f924b-05b8-41ce-b638-cdd7246f3d7a", "2fa4d4ed-fd46-4469-9b95-f7a61d4f9089"]
 } 
 
 variable "enable_letsencrypt" {
