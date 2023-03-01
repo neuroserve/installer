@@ -49,7 +49,6 @@ provisioner "file" {
 user_script = templatefile("../../share/terraform/scripts/startup.sh",
     {
       home_path          = "/var/tmp"
-#       dns_zone           = var.dns_host == "sslip.io" ? "${triton_machine.spin.primaryip}.${var.dns_host}" : var.dns_host,
       dns_zone           = var.dns_host ==  "sslip.io" ? "svc.${data.triton_account.main.id}.${var.cns_suffix}" : var.dns_host,     
 enable_letsencrypt = var.enable_letsencrypt,
 
