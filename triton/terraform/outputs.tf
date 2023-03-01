@@ -1,6 +1,6 @@
 output "public_ip_address" {
   description = "The public IP address associated with the Triton instance"
-  value       = self.primaryip 
+  value       = triton_machine.spin.primaryip
 }
 
 output "dns_host" {
@@ -10,12 +10,12 @@ output "dns_host" {
 
 output "bindle_url" {
   description = "The URL for the Bindle server"
-  value       = "${var.enable_letsencrypt ? "https" : "http"}://bindle.${var.dns_host == "sslip.io" ? "${self.primaryip}.${var.dns_host}" : var.dns_host}/v1"
+  value       = "${var.enable_letsencrypt ? "https" : "http"}://bindle.${var.dns_host == "sslip.io" ? "${triton_machine.spin.primaryip}.${var.dns_host}" : var.dns_host}/v1"
 }
 
 output "hippo_url" {
   description = "The URL for the Hippo server"
-  value       = "${var.enable_letsencrypt ? "https" : "http"}://hippo.${var.dns_host == "sslip.io" ? "${self.primaryip}.${var.dns_host}" : var.dns_host}"
+  value       = "${var.enable_letsencrypt ? "https" : "http"}://hippo.${var.dns_host == "sslip.io" ? "${triton_machine.spin.primaryip}.${var.dns_host}" : var.dns_host}"
 }
 
 output "hippo_admin_username" {
@@ -33,11 +33,11 @@ output "environment" {
   description = "Get environment config by running: $(terraform output -raw environment)"
   sensitive   = true
   value       = <<EOM
-export DNS_DOMAIN=${var.dns_host == "sslip.io" ? "${self.primaryip}.${var.dns_host}" : var.dns_host}
-export HIPPO_URL=${var.enable_letsencrypt ? "https" : "http"}://hippo.${var.dns_host == "sslip.io" ? "${self.primaryip}.${var.dns_host}" : var.dns_host}
+export DNS_DOMAIN=${var.dns_host == "sslip.io" ? "${triton_machine.spin.primaryip}.${var.dns_host}" : var.dns_host}
+export HIPPO_URL=${var.enable_letsencrypt ? "https" : "http"}://hippo.${var.dns_host == "sslip.io" ? "${triton_machine.spin.primaryip}.${var.dns_host}" : var.dns_host}
 export HIPPO_USERNAME=${var.hippo_admin_username}
 export HIPPO_PASSWORD=${random_password.hippo_admin_password.result}
-export BINDLE_URL=${var.enable_letsencrypt ? "https" : "http"}://bindle.${var.dns_host == "sslip.io" ? "${self.primaryip}.${var.dns_host}" : var.dns_host}/v1
+export BINDLE_URL=${var.enable_letsencrypt ? "https" : "http"}://bindle.${var.dns_host == "sslip.io" ? "${triton_machine.spin.primaryip}.${var.dns_host}" : var.dns_host}/v1
 
 EOM
 }
