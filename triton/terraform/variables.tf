@@ -43,7 +43,7 @@ variable "cns_suffix" {
 variable "enable_letsencrypt" {
   description = "Enable cert provisioning via Let's Encrypt"
   type        = bool
-  default     = false
+  default     = true
 }
 
 variable "dns_host" {
