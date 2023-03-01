@@ -34,6 +34,12 @@ variable "machine_networks" {
   default     = ["aa3f924b-05b8-41ce-b638-cdd7246f3d7a", "2fa4d4ed-fd46-4469-9b95-f7a61d4f9089"]
 } 
 
+variable "cns_suffix" {
+  description = "CNS suffix for external network (Default: de-gt-2.cns.tgos.xyz )"
+  type        = string
+  default     = "de-gt-2.cns.tgos.xyz"
+}
+
 variable "enable_letsencrypt" {
   description = "Enable cert provisioning via Let's Encrypt"
   type        = bool

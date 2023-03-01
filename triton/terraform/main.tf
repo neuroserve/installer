@@ -9,6 +9,8 @@ locals {
 # -----------------------------------------------------------------------------
 # Instance config
 # -----------------------------------------------------------------------------
+data "triton_account" "main" {}
+
 data "triton_image" "os" {
     name = "ubuntu-focal"
     version = var.image_version
@@ -35,20 +37,21 @@ resource "triton_machine" "spin" {
     connection {
         host = self.primaryip
         type = "ssh"
-        user = "root"
+        user = "ubuntu"
     }
 
  # Add config files, scripts, Nomad jobs to host
 provisioner "file" {
     source      = "../../share/terraform/vm_assets/"
-    destination = "/mnt"
+    destination = "/var/tmp"
 }
   
 user_script = templatefile("../../share/terraform/scripts/startup.sh",
     {
-      home_path          = "/mnt"
-      dns_zone           = var.dns_host == "sslip.io" ? "${triton_machine.spin.primaryip}.${var.dns_host}" : var.dns_host,
-      enable_letsencrypt = var.enable_letsencrypt,
+      home_path          = "/var/tmp"
+#       dns_zone           = var.dns_host == "sslip.io" ? "${triton_machine.spin.primaryip}.${var.dns_host}" : var.dns_host,
+      dns_zone           = var.dns_host == "fermyon.inst.${data.triton_account.main.id}.${var.cns_suffix}"      
+enable_letsencrypt = var.enable_letsencrypt,
 
       nomad_version  = local.dependencies.nomad.version,
       nomad_checksum = local.dependencies.nomad.checksum,
