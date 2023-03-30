@@ -15,13 +15,13 @@ traefik:
   checksum: "562f3c57b6a1fe381e65cd46e6deb0ac6f0ad8f2e277748262814f4c5ef65861"
 
 bindle:
-  version: "v0.8.0"
-  checksum: "2b1d5c8fbd10684147e3546de1c2dcd438e691441ea68ca32c23a4d1c1d81048"
+  version: "v0.8.2"
+  checksum: "136effc538bc2561339b6ac6baf885034423227f920c01f4f4b43ca2ab4c0a84"
 
 spin:
-  version: "v0.6.0"
-  checksum: "fd613b75f0fdc1708d77ca18512b923d24603d4af103a74038815441ddd11573"
+  version: "v1.0.0"
+  checksum: "d6d6efbe8a9ab2e1ca578ee52db2071e04f281fba38123bf10fcc3e2df789f8b"
 
 hippo:
-  version: "v0.19.1"
-  checksum: "46f53d44a8995453cee51ad5e9c129d30de279b9a4f8d12980b4aa805ec23054"
+  version: "v0.20.2"
+  checksum: "6b7bd79a5530533a0c75eafabfc204c1c6335c8891d78ef96e4b88bf1bf2966e"
